@@ -10,7 +10,9 @@ import static org.example.QuineMcCluskeyInput.getVariableNames;
 public class Main {
     public static void main(String[] args) {
         List<String> headers = getVariableNames();
-        List<Integer> minterms = getMinterms(headers.size());
+        int numVariables = headers.size();
+
+        List<Integer> minterms = getMinterms(numVariables);
 
         // Sort minterms
         Collections.sort(minterms);
@@ -18,7 +20,7 @@ public class Main {
         // Convert minterms to binary format and split into bits for table display
         List<List<String>> data = minterms.stream()
                 .map(minterm -> {
-                    String binaryString = String.format("%4s", Integer.toBinaryString(minterm)).replace(' ', '0');
+                    String binaryString = String.format("%" + numVariables + "s", Integer.toBinaryString(minterm)).replace(' ', '0');
                     List<String> row = binaryString.chars()
                             .mapToObj(c -> String.valueOf((char) c))
                             .collect(Collectors.toList());
