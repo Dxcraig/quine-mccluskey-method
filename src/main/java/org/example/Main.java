@@ -15,17 +15,20 @@ public class Main {
         // Sort minterms
         Collections.sort(minterms);
 
-        // Convert minterms to string format for table display
+        // Convert minterms to binary format and split into bits for table display
         List<List<String>> data = minterms.stream()
                 .map(minterm -> {
-                    List<String> row = headers.stream().map(h -> "").collect(Collectors.toList());
-                    row.add(0, String.valueOf(minterm));
+                    String binaryString = String.format("%4s", Integer.toBinaryString(minterm)).replace(' ', '0');
+                    List<String> row = binaryString.chars()
+                            .mapToObj(c -> String.valueOf((char) c))
+                            .collect(Collectors.toList());
+                    row.addFirst(String.valueOf(minterm));
                     return row;
                 })
                 .collect(Collectors.toList());
 
         // Add an empty string as the first header to align with the minterms column
-        headers.add(0, "");
+        headers.addFirst("");
 
         QuineMcCluskey table = new QuineMcCluskey(headers, data);
         System.out.println(table);
