@@ -20,7 +20,7 @@ public class QuineMcCluskey {
 
         // Group data by the number of ones in the binary representation
         for (List<String> row : data) {
-            int minterm = Integer.parseInt(row.get(0));
+            int minterm = Integer.parseInt(row.getFirst());
             int onesCount = Integer.bitCount(minterm);
             groupedData.computeIfAbsent(onesCount, k -> new ArrayList<>()).add(row);
         }
