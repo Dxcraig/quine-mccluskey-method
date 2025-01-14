@@ -32,5 +32,8 @@ public class Main {
 
         QuineMcCluskey table = new QuineMcCluskey(headers, data);
         System.out.println(table);
+
+        // Generate and display the grouped table
+        System.out.println(table.generateGroupedTable());
     }
 }
