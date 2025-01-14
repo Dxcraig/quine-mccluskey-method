@@ -3,6 +3,9 @@ package org.example;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.example.QuineMcCluskeyInput.getMinterms;
+import static org.example.QuineMcCluskeyInput.getNumberOfVariables;
+
 public class Main {
     public static void main(String[] args) {
         List<String> headers = Arrays.asList("Column1", "Column2", "Column3");
@@ -14,6 +17,11 @@ public class Main {
 
         QuineMcCluskey table = new QuineMcCluskey(headers, data);
         System.out.println(table);
+
+        int numVariables = getNumberOfVariables();
+        List<Integer> minterms = getMinterms(numVariables);
+        System.out.println("Number of variables: " + numVariables);
+        System.out.println("Minterms: " + minterms);
     }
 
 }
