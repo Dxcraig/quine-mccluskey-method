@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class QuineMcCluskeyInput {
 
-    public static int getNumberOfVariables() {
+    public static List<String> getVariableNames() {
         Scanner scanner = new Scanner(System.in);
         int numVariables = 0;
         while (numVariables < 1 || numVariables > 4) {
@@ -21,7 +21,13 @@ public class QuineMcCluskeyInput {
                 scanner.next(); // Clear invalid input
             }
         }
-        return numVariables;
+
+        List<String> variableNames = new ArrayList<>();
+        for (int i = 0; i < numVariables; i++) {
+            System.out.print("Enter the name of variable " + (i + 1) + ": ");
+            variableNames.add(scanner.next());
+        }
+        return variableNames;
     }
 
     public static List<Integer> getMinterms(int numVariables) {
@@ -47,6 +53,4 @@ public class QuineMcCluskeyInput {
         }
         return minterms;
     }
-
-
 }

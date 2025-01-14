@@ -1,27 +1,33 @@
 package org.example;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.example.QuineMcCluskeyInput.getMinterms;
-import static org.example.QuineMcCluskeyInput.getNumberOfVariables;
+import static org.example.QuineMcCluskeyInput.getVariableNames;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> headers = Arrays.asList("Column1", "Column2", "Column3");
-        List<List<String>> data = Arrays.asList(
-                Arrays.asList("Value1", "Value2", "Value3"),
-                Arrays.asList("Value4", "Value5", "Value6"),
-                Arrays.asList("Value7", "Value8", "Value9")
-        );
+        List<String> headers = getVariableNames();
+        List<Integer> minterms = getMinterms(headers.size());
+
+        // Sort minterms
+        Collections.sort(minterms);
+
+        // Convert minterms to string format for table display
+        List<List<String>> data = minterms.stream()
+                .map(minterm -> {
+                    List<String> row = headers.stream().map(h -> "").collect(Collectors.toList());
+                    row.add(0, String.valueOf(minterm));
+                    return row;
+                })
+                .collect(Collectors.toList());
+
+        // Add an empty string as the first header to align with the minterms column
+        headers.add(0, "");
 
         QuineMcCluskey table = new QuineMcCluskey(headers, data);
         System.out.println(table);
-
-        int numVariables = getNumberOfVariables();
-        List<Integer> minterms = getMinterms(numVariables);
-        System.out.println("Number of variables: " + numVariables);
-        System.out.println("Minterms: " + minterms);
     }
-
 }
