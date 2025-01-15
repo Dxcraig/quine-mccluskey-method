@@ -55,7 +55,7 @@ public class QuineMcCluskey {
             int group = entry.getKey();
             for (List<String> row : entry.getValue()) {
                 sb.append(String.format("%-" + columnWidths[0] + "s ", group));
-                sb.append(String.format("%-" + columnWidths[1] + "s ", "m" + row.getFirst()));
+                sb.append(String.format("%-" + columnWidths[1] + "s ", "m" + row. getFirst()));
                 for (int i = 1; i < row.size(); i++) {
                     sb.append(String.format("%-" + columnWidths[i + 1] + "s ", row.get(i)));
                 }
@@ -94,6 +94,7 @@ public class QuineMcCluskey {
             }
             sb.append("\n");
         }
+
 
         return sb.toString();
     }
